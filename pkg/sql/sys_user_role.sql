@@ -1,0 +1,1 @@
+CREATE TABLE `sys_user_role` (                                 `user_id` bigint NOT NULL COMMENT '用户编号',                                 `role_id` bigint NOT NULL COMMENT '角色编号') ENGINE=InnoDB DEFAULT CHARSET=utf8mb3

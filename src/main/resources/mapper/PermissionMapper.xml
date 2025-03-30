@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youmans.authority.dao.PermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.youmans.authority.entity.Permission">
+        <id column="id" property="id"/>
+        <result column="label" property="label"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="parent_name" property="parentName"/>
+        <result column="code" property="code"/>
+        <result column="path" property="path"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="type" property="type"/>
+        <result column="icon" property="icon"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remark" property="remark"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="is_delete" property="isDelete"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, label, parent_id, parent_name, code, path, name, url, type, icon, create_time, update_time, remark, order_num, is_delete
+    </sql>
+    <select id="findPermissionListByUserId" resultType="com.youmans.authority.entity.Permission">
+        select
+            DISTINCT
+            p.id,p.parent_id,p.label,p.`code`,p.url,p.type,p.icon,p.remark,p.path,p.name
+        from
+            sys_user as u
+                left join sys_user_role as ur on u.id = ur.user_id
+                left join sys_role as r on ur.role_id = r.id
+                left join sys_role_permission as rp on rp.role_id = r.id
+                left join sys_permission as p on rp.permission_id = p.id
+        where u.id =#{userId}
+        order by p.id asc
+    </select>
+    <select id="findPermissionListByRoleId" resultType="com.youmans.authority.entity.Permission">
+        select t1.* from sys_permission t1 inner join sys_role_permission t2 on t1.id
+            = t2.permission_id
+        where t2.role_id = #{roleId}
+    </select>
+
+</mapper>

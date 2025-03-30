@@ -1,0 +1,22 @@
+CREATE TABLE `sys_user` (
+                            `id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户编号',
+                            `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '登录名称(用户名)',
+                            `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '登录密码',
+                            `is_account_non_expired` tinyint NOT NULL COMMENT '帐户是否过期(1-未过期，0-已过期)',
+                            `is_account_non_locked` tinyint NOT NULL COMMENT '帐户是否被锁定(1-未过期，0-已过期)',
+                            `is_credentials_non_expired` tinyint NOT NULL COMMENT '密码是否过期(1-未过期，0-已过期)',
+                            `is_enabled` tinyint NOT NULL COMMENT '帐户是否可用(1-可用，0-禁用)',
+                            `real_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '真实姓名',
+                            `nick_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '昵称',
+                            `department_id` bigint DEFAULT NULL COMMENT '所属部门ID',
+                            `department_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '所属部门名称',
+                            `gender` tinyint NOT NULL COMMENT '性别(0-男，1-女)',
+                            `phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '电话',
+                            `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '邮箱',
+                            `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'https://manong-authority.oss-cn-guangzhou.aliyuncs.com/avatar/default-avatar.gif' COMMENT '用户头像',
+                            `is_admin` tinyint DEFAULT '0' COMMENT '是否是管理员(1-管理员)',
+                            `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                            `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+                            `is_delete` tinyint DEFAULT '0' COMMENT '是否删除(0-未删除，1-已删除)',
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
