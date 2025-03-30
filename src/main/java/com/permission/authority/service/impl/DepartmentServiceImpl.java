@@ -6,10 +6,8 @@ import com.permission.authority.dao.UserMapper;
 import com.permission.authority.entity.Department;
 import com.permission.authority.dao.DepartmentMapper;
 import com.permission.authority.entity.User;
-import com.permission.authority.entity.query.DepartmentQueryVo;
 import com.permission.authority.service.DepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.permission.authority.utills.DepartmentTree;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -29,6 +27,7 @@ import java.util.List;
 @Transactional
 public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper,
         Department> implements DepartmentService {
-    @Resource
-    private UserMapper userMapper;
+
+
+
 }

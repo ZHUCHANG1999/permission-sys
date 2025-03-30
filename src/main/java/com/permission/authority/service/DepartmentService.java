@@ -1,4 +1,9 @@
 package com.permission.authority.service;
 
-public interface DepartmentService {
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.permission.authority.entity.Department;
+
+public interface DepartmentService extends IService<Department> {
+
+
 }
