@@ -14,15 +14,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * <p>
- *
+ * 
  * </p>
  *
- * @author youmans
- * @since 2022-11-17
+ * @author zc
+ * @since 2025-04-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

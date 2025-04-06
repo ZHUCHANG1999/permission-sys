@@ -2,6 +2,7 @@ package com.permission.authority.config.security.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.permission.authority.config.redis.RedisService;
 import com.permission.authority.entity.User;
 import com.permission.authority.utils.JwtUtils;
 import com.permission.authority.utils.LoginResult;
@@ -28,6 +29,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Resource
     private JwtUtils jwtUtils;
 
+    @Resource
+    private RedisService redisService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -46,8 +49,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         LoginResult loginResult = new LoginResult(user.getId(),
                 ResultCode.SUCCESS,token,expireTime);
         // 将对象转成JSON格式，并消除循环引用
-        String result = JSON.toJSONString(user, SerializerFeature.DisableCircularReferenceDetect);
-        // 获取输出流
+        String result = JSON.toJSONString(loginResult, SerializerFeature.DisableCircularReferenceDetect);
+        // 将token保存到redis
+        String tokenKey = "token_" + token;
+        redisService.set(tokenKey,token,jwtUtils.getExpiration()/1000);
         ServletOutputStream outputStream = response.getOutputStream();
         outputStream.write(result.getBytes(StandardCharsets.UTF_8));
         outputStream.flush();

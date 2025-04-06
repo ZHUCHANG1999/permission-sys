@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.youmans.authority.dao.RoleMapper">
+<mapper namespace="com.permission.authority.dao.RoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.youmans.authority.entity.Role">
+    <resultMap id="BaseResultMap" type="com.permission.authority.entity.Role">
         <id column="id" property="id" />
         <result column="role_code" property="roleCode" />
         <result column="role_name" property="roleName" />
@@ -24,7 +24,5 @@
             (#{roleId},#{item})
         </foreach>
     </insert>
-    <select id="hasDistributionByUser" resultType="com.youmans.authority.entity.dto.UserRoleTo">
-        SELECT * FROM `sys_user_role` WHERE role_id =#{id}
-    </select>
+
 </mapper>

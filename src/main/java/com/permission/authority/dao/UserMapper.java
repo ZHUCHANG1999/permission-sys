@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -12,8 +13,8 @@ import java.util.List;
  *  Mapper 接口
  * </p>
  *
- * @author zhuc
- * @since 2025-03-30
+ * @author zc
+ * @since 2025-04-05
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
@@ -26,5 +27,5 @@ public interface UserMapper extends BaseMapper<User> {
     /**
      * 保存用户角色关系
      */
-    int saveUserRole(@Param("userId") Long userId, @Param("roleIds")List<Long> roleIds);
+    int saveUserRole(@Param("userId") Long userId, @Param("roleIds") List<Long> roleIds);
 }

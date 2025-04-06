@@ -12,11 +12,11 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- *
+ * 
  * </p>
  *
- * @author youmans
- * @since 2022-11-17
+ * @author zc
+ * @since 2025-04-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

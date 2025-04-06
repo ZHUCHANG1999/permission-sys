@@ -22,11 +22,11 @@ public class CustomerAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException) throws IOException, ServletException {
-//设置客户端的响应的内容类型
+        //设置客户端的响应的内容类型
         response.setContentType("application/json;charset=UTF-8");
-//获取输出流
+        //获取输出流
         ServletOutputStream outputStream = response.getOutputStream();
-//消除循环引用
+        //消除循环引用
         String result = JSON.toJSONString(Result.error().code(700).message(
                 "无权限访问, 请联系管理员！"), SerializerFeature.DisableCircularReferenceDetect);
         outputStream.write(result.getBytes(StandardCharsets.UTF_8));

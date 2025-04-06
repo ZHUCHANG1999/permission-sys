@@ -10,13 +10,13 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 public class GeneratorCode {
-    private static String author ="name";//作者名称
-    private static String outputDir ="{dir}";//生成的位置
+    private static String author ="zc";//作者名称
+    private static String outputDir ="D:\\JavaPro\\permission-sys\\src\\main\\java";//生成的位置
     private static String driver ="com.mysql.cj.jdbc.Driver";//驱动，注意版本
     //连接路径,注意修改数据库名称
-    private static String url ="jdbc:mysql://{ip}:3306/tbname?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+    private static String url ="jdbc:mysql://192.168.10.128:3306/db_authority_system?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
     private static String username ="root";//数据库用户名
-    private static String password ="root";//数据库密码
+    private static String password ="a12bCd3_W45pUq6";//数据库密码
     private static String tablePrefix ="sys_";//数据库表的前缀，如t_user
     private static String [] tables = {"sys_user","sys_role","sys_permission","sys_department"};   //生成的表
     private static String parentPackage = "com.permission.authority";//顶级包结构
