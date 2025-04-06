@@ -19,7 +19,6 @@ public class Result<T> {
 
     /**
      * 成功执行，不返回数据
-     * @return
      */
     public static<T> Result<T> ok(){
         Result<T> result = new Result<T>();
@@ -31,9 +30,6 @@ public class Result<T> {
 
     /**
      * 成功执行，并返回数据
-     * @param data
-     * @param <T>
-     * @return
      */
     public static<T> Result<T> ok(T data){
         Result<T> result = new Result<T>();
@@ -46,7 +42,6 @@ public class Result<T> {
 
     /**
      * 失败
-     * @return
      */
     public static<T> Result<T> error(){
         Result<T> result = new Result<T>();
@@ -55,10 +50,9 @@ public class Result<T> {
         result.setMessage("执行失败");
         return result;
     }
+
     /**
      * 设置是否成功
-     * @param success
-     * @return
      */
     public Result<T> success(Boolean success){
         this.setSuccess(success);
@@ -67,8 +61,6 @@ public class Result<T> {
 
     /**
      * 设置状态码
-     * @param code
-     * @return
      */
     public Result<T> code(Integer code){
         this.setCode(code);
@@ -77,8 +69,6 @@ public class Result<T> {
 
     /**
      * 设置返回消息
-     * @param message
-     * @return
      */
     public Result<T> message(String message){
         this.setMessage(message);
@@ -87,7 +77,6 @@ public class Result<T> {
 
     /**
      * 是否存在
-     * @return
      */
     public static<T> Result<T> exist(){
         Result<T> result = new Result<T>();

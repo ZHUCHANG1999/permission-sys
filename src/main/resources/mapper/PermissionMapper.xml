@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.youmans.authority.dao.PermissionMapper">
+<mapper namespace="com.permission.authority.dao.PermissionMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.youmans.authority.entity.Permission">
+    <resultMap id="BaseResultMap" type="com.permission.authority.entity.Permission">
         <id column="id" property="id"/>
         <result column="label" property="label"/>
         <result column="parent_id" property="parentId"/>
@@ -25,7 +25,7 @@
     <sql id="Base_Column_List">
         id, label, parent_id, parent_name, code, path, name, url, type, icon, create_time, update_time, remark, order_num, is_delete
     </sql>
-    <select id="findPermissionListByUserId" resultType="com.youmans.authority.entity.Permission">
+    <select id="findPermissionListByUserId" resultType="com.permission.authority.entity.Permission">
         select
             DISTINCT
             p.id,p.parent_id,p.label,p.`code`,p.url,p.type,p.icon,p.remark,p.path,p.name
@@ -38,7 +38,7 @@
         where u.id =#{userId}
         order by p.id asc
     </select>
-    <select id="findPermissionListByRoleId" resultType="com.youmans.authority.entity.Permission">
+    <select id="findPermissionListByRoleId" resultType="com.permission.authority.entity.Permission">
         select t1.* from sys_permission t1 inner join sys_role_permission t2 on t1.id
             = t2.permission_id
         where t2.role_id = #{roleId}

@@ -3,8 +3,8 @@ package com.permission.authority.config.security.handler;
 
 import com.alibaba.fastjson.JSON;
 
+import com.permission.authority.config.security.exception.CustomerAuthenticationException;
 import com.permission.authority.utils.Result;
-import com.permission.authority.utils.ResultCode;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -36,6 +36,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         // 获取输出流
         ServletOutputStream outputStream = response.getOutputStream();
 
+        int code = 500;
         String message = null;
         if (exception instanceof AccountExpiredException) {
             message = "账户过期,登录失败！";
@@ -49,11 +50,15 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
             message = "账户被锁,登录失败！";
         } else if (exception instanceof InternalAuthenticationServiceException) {
             message = "账户不存在,登录失败！";
-        }else {
+        } else if(exception instanceof CustomerAuthenticationException){
+            message = exception.getMessage();
+            code = 600;
+        }
+        else {
             message = "登录失败！";
         }
 
-        String result = JSON.toJSONString(Result.error().code(ResultCode.ERROR).message(message));
+        String result = JSON.toJSONString(Result.error().code(code).message(message));
         outputStream.write(result.getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
         outputStream.close();

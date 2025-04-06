@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,15 +14,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.swing.*;
-
 /**
  * <p>
- *
+ * 
  * </p>
  *
- * @author youmans
- * @since 2022-11-17
+ * @author zc
+ * @since 2025-04-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -124,6 +123,5 @@ public class Permission implements Serializable {
      * 是否删除(0-未删除，1-已删除)
      */
     private Integer isDelete;
-
 
 }

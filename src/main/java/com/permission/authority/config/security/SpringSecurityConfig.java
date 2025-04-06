@@ -1,10 +1,11 @@
 package com.permission.authority.config.security;
 
+import com.permission.authority.config.security.filter.CheckTokenFilter;
 import com.permission.authority.config.security.handler.AnonymousAuthenticationHandler;
 import com.permission.authority.config.security.handler.CustomerAccessDeniedHandler;
 import com.permission.authority.config.security.handler.LoginFailureHandler;
 import com.permission.authority.config.security.handler.LoginSuccessHandler;
-import com.permission.authority.config.security.service.CustomerUserDetailService;
+import com.permission.authority.config.security.service.CustomerUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.Resource;
 
@@ -24,7 +26,7 @@ import javax.annotation.Resource;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
-    private CustomerUserDetailService customerUserDetailsService;
+    private CustomerUserDetailsService customerUserDetailsService;
     @Resource
     private LoginSuccessHandler loginSuccessHandler;
     @Resource
@@ -34,6 +36,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private CustomerAccessDeniedHandler customerAccessDeniedHandler;
 
+    @Resource
+    private CheckTokenFilter checkTokenFilter;
 
     /**
      * .. 测试登录认证接口
@@ -52,9 +56,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 登录前进行过来
+        http.addFilterBefore(checkTokenFilter, UsernamePasswordAuthenticationFilter.class);
         //登录过程处理
         http.formLogin() // 表单登录
-                .loginProcessingUrl("api/user/login")  //登录请求url地址，自定义即可
+                .loginProcessingUrl("/api/user/login")  //登录请求url地址，自定义即可
                 .successHandler(loginSuccessHandler) //认证成功处理器
                 .failureHandler(loginFailureHandler) //认证失败处理器
                 .and()
@@ -69,7 +75,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(anonymousAuthenticationHandler)  //匿名无权限访问
                 .accessDeniedHandler(customerAccessDeniedHandler)      //认证用户无权限
                 .and()
-                .csrf(); //支持跨域请求
+                .cors(); //支持跨域请求
     }
 
     /**
